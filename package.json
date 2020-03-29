@@ -1,0 +1,22 @@
+{
+  "name": "simple_web_app",
+  "version": "1.0.0",
+  "description": "Hopefully une jolie app toute simple",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon ./index.js",
+    "test": "echo \"Error: no test specified\""
+  },
+  "keywords": [],
+  "author": "Vincent Robert",
+  "license": "ISC",
+  "devDependencies": {
+    "@google/maps": "^1.1.0",
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4"
+  }
+}

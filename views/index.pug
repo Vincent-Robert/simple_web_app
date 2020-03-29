@@ -1,0 +1,25 @@
+extends layout
+
+block layout-content
+  div.View.WelcomeView
+    h1.Banner Titre !
+    div.Message
+      div.Title
+        h3 Tesla model S
+        h1 Taxi à Dinan
+
+      span.Details 
+        h3 24h/24 et 7j/7
+      div.itemscope(itemtype="http://schema.org/LocalBusiness")
+        h1(itemprop="name")
+            span(itemprop="telephone")
+                a(href="tel:+33664982386") +33664982386
+      div.itemscope(itemtype="http://schema.org/LocalBusiness")
+        h1(itemprop="name")
+          span(itemprop="mail")
+              a(href="mailto:vincent.rob@outlook.fr") vincent.rob@outlook.fr
+
+    div.NavButtons
+      a(href="/user")
+          div.NavButton Prix
+

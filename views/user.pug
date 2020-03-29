@@ -1,0 +1,49 @@
+extends layout
+
+block layout-content
+  div.View.UserView
+    h1.Banner Estimation du prix de la course
+    div.Message
+      div.Title
+        h1 Ici Estimateur de prix 
+        h3 
+          | Les prix peuvent varier en fonction du 
+          br
+          | traffic et du temps d'attente
+        br
+        div
+          label(for='depart') Départ : 
+          input#depart(type='text', name='depart', placeholder="ville")
+          br
+          label(for='arrivee') Arrivée :
+          input#arrivee(type='text', name='arrivee', placeholder="ville")
+        br
+        div
+          button(onclick="SomeFunction()") Calculer
+        h3#resultat
+        br
+        h3#prix
+      //pre.Details=JSON.stringify(userProfile, null, 2)
+    div.NavButtons
+      a(href="/")
+        div.NavButton Retour
+        
+  script.
+    function SomeFunction() {
+      var service = new google.maps.DistanceMatrixService();
+      service.getDistanceMatrix({origins: [depart.value], destinations: [arrivee.value], travelMode: google.maps.TravelMode.DRIVING, unitSystem: google.maps.UnitSystem.METRIC}, callback_);
+      function callback_(response, status) {
+        if (status == 'OK') {
+          var origins = response.originAddresses;
+          var destinations = response.destinationAddresses;
+          var results = response.rows[0].elements;
+          var element = results[0];
+          var distance = element.distance.text;
+          var duration = element.duration.text;
+          resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
+          prix.innerHTML = "Soit " + Math.round(100*Math.max(7.30, parseInt(distance.split(" ")[0])*0.95*2))/100 + "€ environ"
+        }
+      }
+    }
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzsQHMLpMsDFANnWyvPsVECyMF9qO9Qh4")
+
