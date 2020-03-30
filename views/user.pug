@@ -2,12 +2,12 @@ extends layout
 
 block layout-content
   div.View.UserView
-    h1.Banner Estimation du prix de la course
+    h1.Banner Estimation du prix
     div.Message
       div.Title
         h1 Ici Estimateur de prix 
         h3 
-          | Les prix peuvent varier en fonction du 
+          | Le prix peut varier en fonction du 
           br
           | traffic et du temps d'attente
         br
@@ -18,19 +18,19 @@ block layout-content
           label(for='arrivee') Arrivée :
           input#arrivee(type='text', name='arrivee', placeholder="ville")
         div
-          label(for="aller_retour") Aller Simple
+          label(for="aller_retour") Aller simple
           input#aller_retour(type="checkbox") 
         div
           label(for="jour_nuit") Dimanche, férié ou de nuit                       
           input#jour_nuit(type="checkbox") 
         div
           label(for="ferie") Dimanche ou férié
-          input#ferie(type="checkbox") 
+          input#ferie(type="checkbox")
         br
         div
           button(onclick="SomeFunction()") Calculer
-        h3#resultat
-        br
+        //h3#resultat
+        //br
         h3#prix
       //pre.Details=JSON.stringify(userProfile, null, 2)
     div.NavButtons
@@ -55,7 +55,7 @@ block layout-content
           if (aller_retour.checked){
             forfait_coeff_km = forfait_coeff_km*2
           }
-          resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
+          //resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
           prix.innerHTML = "Soit " + Math.round(220 + 100*Math.max(7.30, parseInt(distance.split(" ")[0])*forfait_coeff_km))/100 + "€ environ"
         }
       }

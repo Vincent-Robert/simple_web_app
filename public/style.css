@@ -71,7 +71,7 @@ a {
   user-select: none;
 }
 
-a[href^="tel:+33664982386"]:before {
+a[href^="tel:+33608315592"]:before {
   content: "\260e";  
   font-size: 1.17em;
   color: ;
@@ -80,7 +80,7 @@ a[href^="tel:+33664982386"]:before {
   align-items: center;
 }
 
-a[href^="tel:+33664982386"] {
+a[href^="tel:+33608315592"] {
   color: ;
   margin-right: 0.5em;
   justify-content: center;
@@ -88,7 +88,7 @@ a[href^="tel:+33664982386"] {
   align-items: center;
 }
 
-a[href^="mailto:vincent.rob@outlook.fr"] { 
+a[href^="mailto:gil.rob02@gmail.com"] { 
   color: ;
   font-size: 1.17em;
   justify-content: center;
@@ -139,7 +139,7 @@ a[href^="mailto:vincent.rob@outlook.fr"] {
 
   overflow: hidden;
   background: white;
-  padding: 1.17em;
+  padding: 0.7em;
 
   font-family: var(--logo-font);
 
@@ -148,20 +148,21 @@ a[href^="mailto:vincent.rob@outlook.fr"] {
 }
 
 .Message {
+  width: 26.5em;
   background: white;
-  padding: 1.6em;
+  padding: 1.5em;
   border-bottom: var(--ui-shawdow-border);
   box-shadow: var(--ui-shawdow);
 }
 
 .Message > .Title {
-  padding-bottom: 1.17em;
+  padding-bottom: 0em;
 }
 
 .Message > .Details {
   display: flex;
   flex-direction: column;
-  line-height: 1.5em;
+  line-height: 1em;
 }
 
 .NavButtons {
