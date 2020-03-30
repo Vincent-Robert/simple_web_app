@@ -22,7 +22,7 @@ block layout-content
 
         div
           label(for='attente') Durée attente : 
-          input#attente(type='time', name='attente', placeholder="0", onclick="attente_change()")
+          input#attente(type='time', name='attente', value="00:00", onclick="attente_change()")
         div
           label(for="jour_nuit") Dimanche, férié ou de nuit
           input#jour_nuit(type="checkbox")
@@ -40,17 +40,17 @@ block layout-content
 
   script.
     function checkbox_change_1(){
-      attente.value = "";
+      attente.value = "00:00";
       aller_retour.checked = !aller_retour.checked;
     }
   script.
     function checkbox_change_2(){
-      attente.value = "";
+      attente.value = "00:00";
       aller_simple.checked = !aller_simple.checked;
     }
   script.
     function attente_change(){
-      attente.value = "";
+      attente.value = "00:00";
       aller_retour.checked = true;
       aller_simple.checked = false;
     }

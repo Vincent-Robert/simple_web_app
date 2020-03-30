@@ -24,8 +24,8 @@ block layout-content
           label(for='attente') Durée attente : 
           input#attente(type='time', name='attente', placeholder="0", onclick="attente_change()")
         div
-          label(for="jour_nuit") Dimanche, férié ou de nuit                       
-          input#jour_nuit(type="checkbox") 
+          label(for="jour_nuit") Dimanche, férié ou de nuit
+          input#jour_nuit(type="checkbox")
         br
         div
           button(onclick="SomeFunction()") Calculer
@@ -56,7 +56,6 @@ block layout-content
     }
   script.
     function SomeFunction() {
-      alert((parseInt(attente.value.split(":")[0]) + (attente.value.split(":")[1]/60))*24.16);
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix({origins: [depart.value], destinations: [arrivee.value], travelMode: google.maps.TravelMode.DRIVING, unitSystem: google.maps.UnitSystem.METRIC}, callback_);
       function callback_(response, status) {
@@ -66,15 +65,23 @@ block layout-content
           var element = response.rows[0].elements[0];
           var distance = element.distance.text;
           var duration = element.duration.text;
-          var forfait_coeff_km = 0.95;
+          var forfait_coeff_km = 0.95*2;
           if (jour_nuit.checked){
-            forfait_coeff_km = 1.43
+            forfait_coeff_km = 1.43*2;
           }
+          var prix_route = parseInt(distance.split(" ")[0])*forfait_coeff_km;
           if (aller_retour.checked){
-            forfait_coeff_km = forfait_coeff_km*2
+            if (attente.value == "") {
+              prix_route = prix_route
+            }else if (attente.value.split(":")[0] == ""){
+              prix_route = prix_route + (attente.value.split(":")[1]/60)*24.16;
+            }else if (attente.value.split(":")[1] == ""){
+              prix_route = prix_route + (parseInt(attente.value.split(":")[0]))*24.16;
+            }else {
+              prix_route = prix_route + (parseInt(attente.value.split(":")[0]) + (attente.value.split(":")[1]/60))*24.16;
+            }
           }
-          //resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
-          prix.innerHTML = "Cela ferait " + Math.round(220 + 100*Math.max(5.10, parseInt(distance.split(" ")[0])*forfait_coeff_km) + (parseInt(attente.value.split(":")[0]) + (attente.value.split(":")[1]/60))*24.16)/100 + "€ environ"
+          prix.innerHTML = "Cela ferait " + Math.round(220 + 100*Math.max(5.10,  prix_route))/100 + "€ environ"
         }
       }
     }
