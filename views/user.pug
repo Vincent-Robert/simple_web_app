@@ -17,6 +17,15 @@ block layout-content
           br
           label(for='arrivee') Arrivée :
           input#arrivee(type='text', name='arrivee', placeholder="ville")
+        div
+          label(for="aller_retour") Aller Simple
+          input#aller_retour(type="checkbox") 
+        div
+          label(for="jour_nuit") Dimanche, férié ou de nuit                       
+          input#jour_nuit(type="checkbox") 
+        div
+          label(for="ferie") Dimanche ou férié
+          input#ferie(type="checkbox") 
         br
         div
           button(onclick="SomeFunction()") Calculer
@@ -36,12 +45,18 @@ block layout-content
         if (status == 'OK') {
           var origins = response.originAddresses;
           var destinations = response.destinationAddresses;
-          var results = response.rows[0].elements;
-          var element = results[0];
+          var element = response.rows[0].elements[0];
           var distance = element.distance.text;
           var duration = element.duration.text;
+          var forfait_coeff_km = 0.95;
+          if ((ferie.checked) || (jour_nuit.checked)){
+            forfait_coeff_km = 1.43
+          }
+          if (aller_retour.checked){
+            forfait_coeff_km = forfait_coeff_km*2
+          }
           resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
-          prix.innerHTML = "Soit " + Math.round(100*Math.max(7.30, parseInt(distance.split(" ")[0])*0.95*2))/100 + "€ environ"
+          prix.innerHTML = "Soit " + Math.round(220 + 100*Math.max(7.30, parseInt(distance.split(" ")[0])*forfait_coeff_km))/100 + "€ environ"
         }
       }
     }
