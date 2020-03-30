@@ -5,12 +5,8 @@ block layout-content
     h1.Banner Estimation du prix
     div.Message
       div.Title
-        h1 Ici estimateur de prix 
-        h3 
-          | Le prix peut varier en fonction du 
-          br
-          | traffic et du temps d'attente
-        br
+        h1 Estimateur de prix 
+        h3 Le prix peut varier en fonction du trafic
         div
           label(for='depart') Départ : 
           input#depart(type='text', name='depart', placeholder="ville")
@@ -18,14 +14,18 @@ block layout-content
           label(for='arrivee') Arrivée :
           input#arrivee(type='text', name='arrivee', placeholder="ville")
         div
-          label(for="aller_retour") Aller simple
-          input#aller_retour(type="checkbox") 
+          label(for="aller_simple") Aller simple
+          input#aller_simple(type="checkbox", onchange="checkbox_change_1()", checked) 
+        div
+          label(for="aller_retour") Aller retour                       
+          input#aller_retour(type="checkbox", onchange="checkbox_change_2()") 
+
+        div
+          label(for='attente') Durée attente : 
+          input#attente(type='time', name='attente', placeholder="0", onclick="attente_change()")
         div
           label(for="jour_nuit") Dimanche, férié ou de nuit                       
           input#jour_nuit(type="checkbox") 
-        div
-          label(for="ferie") Dimanche ou férié
-          input#ferie(type="checkbox")
         br
         div
           button(onclick="SomeFunction()") Calculer
@@ -37,9 +37,26 @@ block layout-content
     div.NavButtons
       a(href="/")
         div.NavButton Retour
-        
+
+  script.
+    function checkbox_change_1(){
+      attente.value = "";
+      aller_retour.checked = !aller_retour.checked;
+    }
+  script.
+    function checkbox_change_2(){
+      attente.value = "";
+      aller_simple.checked = !aller_simple.checked;
+    }
+  script.
+    function attente_change(){
+      attente.value = "";
+      aller_retour.checked = true;
+      aller_simple.checked = false;
+    }
   script.
     function SomeFunction() {
+      alert((parseInt(attente.value.split(":")[0]) + (attente.value.split(":")[1]/60))*24.16);
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix({origins: [depart.value], destinations: [arrivee.value], travelMode: google.maps.TravelMode.DRIVING, unitSystem: google.maps.UnitSystem.METRIC}, callback_);
       function callback_(response, status) {
@@ -50,14 +67,14 @@ block layout-content
           var distance = element.distance.text;
           var duration = element.duration.text;
           var forfait_coeff_km = 0.95;
-          if ((ferie.checked) || (jour_nuit.checked)){
+          if (jour_nuit.checked){
             forfait_coeff_km = 1.43
           }
           if (aller_retour.checked){
             forfait_coeff_km = forfait_coeff_km*2
           }
           //resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
-          prix.innerHTML = "Cela ferait " + Math.round(220 + 100*Math.max(7.30, parseInt(distance.split(" ")[0])*forfait_coeff_km))/100 + "€ environ"
+          prix.innerHTML = "Cela ferait " + Math.round(220 + 100*Math.max(5.10, parseInt(distance.split(" ")[0])*forfait_coeff_km) + (parseInt(attente.value.split(":")[0]) + (attente.value.split(":")[1]/60))*24.16)/100 + "€ environ"
         }
       }
     }
