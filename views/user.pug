@@ -5,7 +5,7 @@ block layout-content
     h1.Banner Estimation du prix
     div.Message
       div.Title
-        h1 Ici Estimateur de prix 
+        h1 Ici estimateur de prix 
         h3 
           | Le prix peut varier en fonction du 
           br
@@ -29,6 +29,7 @@ block layout-content
         br
         div
           button(onclick="SomeFunction()") Calculer
+        br
         //h3#resultat
         //br
         h3#prix
@@ -56,7 +57,7 @@ block layout-content
             forfait_coeff_km = forfait_coeff_km*2
           }
           //resultat.innerHTML = "Ca ferait " + distance + " ou " + duration;
-          prix.innerHTML = "Soit " + Math.round(220 + 100*Math.max(7.30, parseInt(distance.split(" ")[0])*forfait_coeff_km))/100 + "€ environ"
+          prix.innerHTML = "Cela ferait " + Math.round(220 + 100*Math.max(7.30, parseInt(distance.split(" ")[0])*forfait_coeff_km))/100 + "€ environ"
         }
       }
     }
