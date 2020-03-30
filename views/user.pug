@@ -56,7 +56,6 @@ block layout-content
     }
   script.
     function SomeFunction() {
-      alert(attente.value);
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix({origins: [depart.value], destinations: [arrivee.value], travelMode: google.maps.TravelMode.DRIVING, unitSystem: google.maps.UnitSystem.METRIC}, callback_);
       function callback_(response, status) {
