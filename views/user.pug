@@ -54,15 +54,18 @@ block layout-content
     }
   script.
     function SomeFunction() {
-      alert(depart.value);
-      alert(arrivee.value);
       var service = new google.maps.DistanceMatrixService();
       service.getDistanceMatrix({origins: [depart.value], destinations: [arrivee.value], travelMode: google.maps.TravelMode.DRIVING, unitSystem: google.maps.UnitSystem.METRIC}, callback_);
       function callback_(response, status) {
         alert(response);
+        alert(response.rows);
+        alert(response.rows[0]);
+        alert(response.rows[0].elements);
+        alert(response.rows[0].elements[0]);
+        alert(response.rows[0].elements[0].distance);
+        alert(response.rows[0].elements[0].distance.text);
+        alert(response.rows[0].elements[0].duration.text);
         if (status == 'OK') {
-          var origins = response.originAddresses;
-          var destinations = response.destinationAddresses;
           var element = response.rows[0].elements[0];
           var distance = element.distance.text;
           var duration = element.duration.text;
