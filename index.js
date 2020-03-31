@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 app.get("/user", (req, res) => {
-  res.render("user", { title: "Tarifs", userProfile: { nickname: "Auth0" } });
+  res.render("user", { title: "Tarifs", api_key: { nb: "AIzaSyDzsQHMLpMsDFANnWyvPsVECyMF9qO9Qh4" } });
 });
 
 /**
