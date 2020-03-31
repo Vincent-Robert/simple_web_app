@@ -70,7 +70,6 @@ block layout-content
           return;
         }
       })
-    }
   script.
     function SomeFunction() {
       var service = new google.maps.DistanceMatrixService();
