@@ -80,9 +80,9 @@ block layout-content
           var element = response.rows[0].elements[0];
           var distance = element.distance.text;
           var duration = element.duration.text;
-          var forfait_coeff_km = 0.95*2;
+          var forfait_coeff_km = 1.08*2;
           if (jour_nuit.checked){
-            forfait_coeff_km = 1.43*2;
+            forfait_coeff_km = 1.62*2;
           }
           var prix_route = parseInt(distance.split(" ")[0])*forfait_coeff_km;
           if (aller_retour.checked){
